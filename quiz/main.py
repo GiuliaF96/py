@@ -1,15 +1,21 @@
 
-def mostra_feedback(messaggio : srt) -> none:
+def mostra_feedback(messaggio : str) -> None:
     simbol : srt = "*"*30
     print(f"""
 {simbol}
 {messaggio}
-{simbol}""")
+{simbol}
+""")
+def is_risposta_esatta(scelta : str) -> bool:
+    if scelta.upper() == "C":
+          return True
+    else: 
+          return False
+ 
 
-
-def genera_feedback(scelta: srt) -> srt:
+def genera_feedback(is_corretta: bool) -> str:
     
-     if scelta.upper() == "C":
+     if is_corretta() == True:
           return "Hai indovitato!"
      else: 
           return "Non hai indovinato.Riprova"
@@ -61,9 +67,9 @@ def main():
         feedback : str = ""
 
         if risposta_validata == True:
-            feedback = genera_feedback(risposta_da_validare)
-            if feedback == "Hai indovinato":
-                is_risposta_corretta = True
+            is_risposta_corretta = is_risposta_esatta(risposta_da_validare)
+            feedback = genera_feedback(is_risposta_corretta)
+            
         else:
             feedback = "inserisci solo la risposta tra le opzioni elencate"
 
