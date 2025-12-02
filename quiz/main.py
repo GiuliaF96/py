@@ -54,8 +54,17 @@ def raccogli_risposta() -> str:
         risposta: str = input("Inserisci la tua scelta: ")
         return risposta
 
+def leggi_file() -> None:
+
+    with open("domande.txt", "r" ) as file:
+        contenuto = file.read()
+        print(contenuto)
 
 def main():
+    leggi_file()
+
+
+    """
     is_risposta_corretta: bool = False 
     
     while True:
@@ -77,5 +86,6 @@ def main():
         mostra_feedback(feedback)
         if is_risposta_corretta == True:
             break
+"""
 
 main()
