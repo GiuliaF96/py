@@ -32,5 +32,50 @@ print(deleted_values)
 """
 
 #dizionari 
+"""
 
-dizionario: dict[str, int] = {
+personaggio1: dict[ str | int] = {
+
+    "nome": "Pippo",
+    "tipo": "cane",
+    "email": "pippo@disney.com"
+}
+
+personaggio1["Telefono"] = "1234567890"
+
+#print(personaggio1.get("Telefono"))
+#print(personaggio1.get("nome"))
+
+personaggio1["nome"] = "Pluto"
+
+for chiave, valore in personaggio1.items():
+
+    print(f"{chiave} : {valore}")
+    """
+
+personaggio1: dict[ str | int] = {
+
+    "nome": "Pippo",
+    "tipo": "cane",
+    "email": "pippo@disney.com"
+}
+
+personaggio2: dict[ str | int] = {
+
+    "nome": "Minnie",
+    "tipo": "topo",
+    "email": "minnieo@disney.com"
+}
+personaggi: list[ dict[ str | int]] = []
+print(personaggi[1].get("tipo"))
+
+del personaggio1["tipo"]
+
+#print(personaggio1.get("Telefono"))
+#print(personaggio1.get("nome"))
+
+personaggio1["nome"] = "Pluto"
+
+for x in personaggi:
+    if x.get("tipo") == "topo":
+        x("tipo")
