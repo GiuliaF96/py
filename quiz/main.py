@@ -105,8 +105,10 @@ def main():
         domanda_e_risposta["domanda"] = estrai_domanda(content, index)
         domanda_e_risposta["risposta"] = estrai_risposta(content, index)
 
-        mostra_domanda(domanda_e_risposta["domanda"])
+        print(f"Domanda {counter_domanda_corrente + 1} di {lista_domande_length}")
 
+        mostra_domanda(domanda_e_risposta["domanda"])
+        
         risposta_utente: str = raccogli_risposta()
 
         is_risposta_valid: bool = valida_scelta(risposta_utente)
@@ -117,15 +119,30 @@ def main():
             risultato: dict[str, str | bool] = {}
             is_risposta_corretta: bool = is_risposta_esatta(risposta_utente, domanda_e_risposta["risposta"])
             feedback = genera_feedback(is_risposta_corretta)
+              
+
             risultato["domanda"] = lista_domande[counter_domanda_corrente]
             risultato["risposta_corretta"] = is_risposta_corretta
-            risultato_finale.append(risultato)
-            counter_domanda_corrente += 1
+            
         else: 
             feedback = "Inserisci solo la risposta tra le opzioni elencate"
 
         mostra_feedback(feedback)
-
+        
+        print(f"Vuoi passare alla domanda successiva o tornare a quella precedente?")
+        scelta: str = input("S per Successiva, P per precedente: ")
+        scelta = scelta.upper() 
+        if scelta == "S": 
+                counter_domanda_corrente += 1
+        elif scelta == "P" and counter_domanda_corrente > 0:
+                if counter_domanda_corrente == 0:
+                    print("Sei alla prima domanda, non puoi tornare indietro.")
+                else:           
+                    counter_domanda_corrente -= 1
+        else:
+                print("Scelta non valida, proseguo con la domanda successiva.")   
+    risultato_finale.append(risultato)
+    counter_domanda_corrente += 1
     statistiche: dict[str, int] = genera_statistiche(risultato_finale)
 
     print(statistiche["risposte_esatte"])
