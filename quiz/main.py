@@ -81,13 +81,32 @@ def genera_statistiche(risultato_finale: list[dict[str, str | bool]]) -> dict[st
 
     for i in risultato_finale: 
         if i["risposta_corretta"]:
-            risposte_esatte += 1
+            risposte_esatte + 1
         else:
-            risposte_non_esatte += 1
+            risposte_non_esatte + 1
 
     statistica["risposte_esatte"] = risposte_esatte
     statistica["risposte_non_esatte"] = risposte_non_esatte
     return statistica
+
+"""
+def domanda_successiva(counter_domanda_corrente: int )-> int:
+    print(f"Vuoi passare alla domanda successiva o tornare a quella precedente?")
+    scelta: str = input("S per Successiva, P per precedente: ")
+    scelta = scelta.upper() 
+   
+    if scelta == "S": 
+        counter_domanda_corrente + 1
+    elif scelta == "P" :
+        if counter_domanda_corrente == 0:
+            print("Sei alla prima domanda, non puoi tornare indietro.")
+            return counter_domanda_corrente
+        return counter_domanda_corrente - 1
+    else:
+        print("Scelta non valida, proseguo con la domanda successiva.") 
+        counter_domanda_corrente + 1 
+        """
+
 
 def main():
     lista_domande: list[str] = []
@@ -106,6 +125,7 @@ def main():
         domanda_e_risposta["risposta"] = estrai_risposta(content, index)
 
         print(f"Domanda {counter_domanda_corrente + 1} di {lista_domande_length}")
+    
 
         mostra_domanda(domanda_e_risposta["domanda"])
         
@@ -114,6 +134,8 @@ def main():
         is_risposta_valid: bool = valida_scelta(risposta_utente)
 
         feedback: str = ""
+        
+    
 
         if is_risposta_valid:
             risultato: dict[str, str | bool] = {}
@@ -128,7 +150,7 @@ def main():
             feedback = "Inserisci solo la risposta tra le opzioni elencate"
 
         mostra_feedback(feedback)
-        
+
         print(f"Vuoi passare alla domanda successiva o tornare a quella precedente?")
         scelta: str = input("S per Successiva, P per precedente: ")
         scelta = scelta.upper() 
@@ -141,12 +163,29 @@ def main():
                     counter_domanda_corrente -= 1
         else:
                 print("Scelta non valida, proseguo con la domanda successiva.")   
+                counter_domanda_corrente += 1
+    print("Hai completato il quiz!")
+    risultato_finale.append(risultato)
+    counter_domanda_corrente += 1
+    
+    #domanda_successiva()
+
+    
+   
+
+        
+
+        
+          
     risultato_finale.append(risultato)
     counter_domanda_corrente += 1
     statistiche: dict[str, int] = genera_statistiche(risultato_finale)
+    print(f"risposte esatte: {statistiche['risposte_esatte']}")
+    print(f"risposte sbagliate: {statistiche['risposte_non_esatte']}")
 
-    print(statistiche["risposte_esatte"])
-    print(statistiche["risposte_non_esatte"])   
+
+    #print(f"risposte esatte:"(statistiche["risposte_esatte"]))
+    #print(f"risposte sbagliate:"(statistiche["risposte_non_esatte"]))
 
 
 # Entry point del nostro programma
